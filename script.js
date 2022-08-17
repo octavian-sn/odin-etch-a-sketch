@@ -22,9 +22,11 @@ function gridSize(a) {
     gameWindow.style.gridTemplateColumns = `repeat(${a}, 1fr)`;
     for (i = 0; i < (a*a); i++) {
         let square = document.createElement('div');
+        let opacity = 0.1
         square.classList.add('square');
         square.addEventListener('mouseover', function(){
-            square.style.backgroundColor = 'DarkSeaGreen';
+            opacity += 0.1;
+            square.style.opacity = opacity;
         });
         gameWindow.appendChild(square);
     }
@@ -52,15 +54,21 @@ function colorSketch() {
         item.style.opacity = 0.7;
     })
 });
+grayButton.classList.remove('pressed');
+colorButton.classList.add('pressed');
 }
 
 function graySketch() {
     document.querySelectorAll('.square').forEach(item => {
+        let opacity = 0.1;
         item.addEventListener('mouseover', function(){
-        item.style.backgroundColor = 'gray';
-        item.style.opacity = 0.7;
+            item.style.backgroundColor = 'black';
+            opacity += 0.1;
+            item.style.opacity = opacity;
     })
 });
+colorButton.classList.remove('pressed');
+grayButton.classList.add('pressed');
 }
 
 function randomColor() {
@@ -96,4 +104,21 @@ const resetButton = document.createElement('button');
 resetButton.innerText = 'RESET';
 resetButton.classList.add('button', 'reset');
 menu.appendChild(resetButton);
-resetButton.addEventListener('click', function(){removeChild(), gridSize(50)});
+resetButton.addEventListener('click', function(){removeChild(), gridSize(50),
+    grayButton.classList.remove('pressed');
+    colorButton.classList.remove('pressed');});
+    
+const credits = document.createElement('div');
+credits.classList.add('credits');
+container.appendChild(credits);
+
+let text = document.createElement('p');
+text.innerText = 'Copyright Ⓒ 2022 TheOdinProject - created by';
+credits.appendChild(text);
+let one = document.createElement('a');
+one.classList.add('link');
+let link = document.createTextNode('Octavian Șulic')
+one.appendChild(link);
+one.title = "Octavian Șulic's GitHub page";
+one.href = 'https://github.com/octavian-sn'
+credits.appendChild(one);
