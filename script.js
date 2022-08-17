@@ -22,7 +22,7 @@ function gridSize(a) {
     gameWindow.style.gridTemplateColumns = `repeat(${a}, 1fr)`;
     for (i = 0; i < (a*a); i++) {
         let square = document.createElement('div');
-        square.classList.add('square', i);
+        square.classList.add('square');
         square.addEventListener('mouseover', function(){
             square.style.backgroundColor = 'DarkSeaGreen';
         });
@@ -39,10 +39,37 @@ function removeChild() {
 
 function changeSize() {
     let size = prompt('Please enter a value between 2 - 100.');
-    removeChild();
     if (size >= 2 && size < 101) {
+        removeChild();
         gridSize(size);
-    } else gridSize(50);
+    } 
+}
+
+function colorSketch() {
+    document.querySelectorAll('.square').forEach(item => {
+        item.addEventListener('mouseover', function(){
+        item.style.backgroundColor = randomColor();
+        item.style.opacity = 0.7;
+    })
+});
+}
+
+function graySketch() {
+    document.querySelectorAll('.square').forEach(item => {
+        item.addEventListener('mouseover', function(){
+        item.style.backgroundColor = 'gray';
+        item.style.opacity = 0.7;
+    })
+});
+}
+
+function randomColor() {
+    let letter = '0123456789ABCDEF';
+    let color = '#'
+    for (i = 0; i < 6; i++) {
+        color += letter[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
 
 gridSize(50);
@@ -52,3 +79,21 @@ sizeButton.innerText = 'CHANGE THE SIZE';
 sizeButton.classList.add('button', 'size');
 menu.appendChild(sizeButton);
 sizeButton.addEventListener('click', function (){changeSize()});
+
+const colorButton = document.createElement('button');
+colorButton.innerText = 'RAINBOW';
+colorButton.classList.add('button', 'color');
+menu.appendChild(colorButton);
+colorButton.addEventListener('click', function(){colorSketch()});
+
+const grayButton = document.createElement('button');
+grayButton.innerText = 'NORMAL';
+grayButton.classList.add('button', 'gray');
+menu.appendChild(grayButton);
+grayButton.addEventListener('click', function(){graySketch()});
+
+const resetButton = document.createElement('button');
+resetButton.innerText = 'RESET';
+resetButton.classList.add('button', 'reset');
+menu.appendChild(resetButton);
+resetButton.addEventListener('click', function(){removeChild(), gridSize(50)});

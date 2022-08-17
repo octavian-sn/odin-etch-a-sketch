@@ -43,6 +43,10 @@ body {
     background-color: rgb(230, 218, 227);
 }
 
+.test {
+    background-color: black;
+}
+
 .menu {
     display: flex;
     flex-direction: column;
@@ -52,7 +56,7 @@ body {
 
 }
 
-.size {
+.button {
     background-color: inherit;
     font-size: large;
     border-radius: 5px;
