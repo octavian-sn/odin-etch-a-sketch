@@ -55,7 +55,20 @@ function colorSketch() {
     })
 });
 grayButton.classList.remove('pressed');
+eraseButton.classList.remove('pressed');
 colorButton.classList.add('pressed');
+}
+
+function eraser() {
+    document.querySelectorAll('.square').forEach(item => {
+        item.addEventListener('mouseover', function(){
+        item.style.backgroundColor = 'black';
+        item.style.opacity = 0.1;
+    })
+});
+grayButton.classList.remove('pressed');
+colorButton.classList.remove('pressed');
+eraseButton.classList.add('pressed');
 }
 
 function graySketch() {
@@ -67,6 +80,7 @@ function graySketch() {
             item.style.opacity = opacity;
     })
 });
+eraseButton.classList.remove('pressed');
 colorButton.classList.remove('pressed');
 grayButton.classList.add('pressed');
 }
@@ -98,16 +112,24 @@ const grayButton = document.createElement('button');
 grayButton.innerText = 'NORMAL';
 grayButton.classList.add('button', 'gray');
 menu.appendChild(grayButton);
+grayButton.classList.add('pressed');
 grayButton.addEventListener('click', function(){graySketch()});
+
+const eraseButton = document.createElement('button');
+eraseButton.innerText = 'ERASER';
+eraseButton.classList.add('button', 'erase');
+menu.appendChild(eraseButton);
+eraseButton.addEventListener('click', function(){eraser()});
 
 const resetButton = document.createElement('button');
 resetButton.innerText = 'RESET';
 resetButton.classList.add('button', 'reset');
 menu.appendChild(resetButton);
 resetButton.addEventListener('click', function(){removeChild(), gridSize(50),
-    grayButton.classList.remove('pressed');
-    colorButton.classList.remove('pressed');});
-    
+    grayButton.classList.add('pressed'), 
+    colorButton.classList.remove('pressed'),
+    eraseButton.classList.remove('pressed')});
+
 const credits = document.createElement('div');
 credits.classList.add('credits');
 container.appendChild(credits);
