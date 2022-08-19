@@ -94,6 +94,7 @@ function randomColor() {
     return color;
 }
 
+// Drawing the default sketch board
 gridSize(50);
 
 const sizeButton = document.createElement('button');
