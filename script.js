@@ -1,3 +1,4 @@
+// Creating the containers
 const body = document.querySelector('body');
 
 const container = document.createElement('div');
@@ -18,6 +19,7 @@ const menu = document.createElement('div')
 menu.classList.add('menu');
 container.insertBefore(menu, gameWindow);
 
+// Creating functions for the grid/sizing/clearing and colorizing
 function gridSize(a) {
     gameWindow.style.gridTemplateColumns = `repeat(${a}, 1fr)`;
     for (i = 0; i < (a*a); i++) {
@@ -97,6 +99,7 @@ function randomColor() {
 // Drawing the default sketch board
 gridSize(50);
 
+// Creating the buttons
 const sizeButton = document.createElement('button');
 sizeButton.innerText = 'CHANGE THE SIZE';
 sizeButton.classList.add('button', 'size');
@@ -131,6 +134,7 @@ resetButton.addEventListener('click', function(){removeChild(), gridSize(50),
     colorButton.classList.remove('pressed'),
     eraseButton.classList.remove('pressed')});
 
+// Creating the footer containing credits
 const credits = document.createElement('div');
 credits.classList.add('credits');
 container.appendChild(credits);
